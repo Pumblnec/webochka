@@ -1,9 +1,9 @@
-from flask import Flask 
+from flask import Flask, redirect 
 app = Flask(__name__)
 
-@app.route("/")
-@app.route("/index")
-def start():
+
+@app.route("/menu")
+def mn():
     return """
 
 <!doctype html>
@@ -66,3 +66,8 @@ def startuem():
     </body>
 </html>
 """
+
+@app.route("/")
+@app.route("/index")
+def start():
+    return redirect ('/menu', code=302)
