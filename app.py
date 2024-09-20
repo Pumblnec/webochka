@@ -1,6 +1,10 @@
-from flask import Flask, redirect 
+from flask import Flask, redirect, url_for
 app = Flask(__name__)
 
+@app.route("/")
+@app.route("/index")
+def start():
+    return redirect ('/menu', code=302)
 
 @app.route("/menu")
 def mn():
@@ -11,6 +15,7 @@ def mn():
     <head>
         <title>Варюхин Иван Алексеевич.
         Лабораторная 1</title>
+        <link rel="stylesheet" href='""" + url_for('static', filename='lab1.css') + """'>
     </head>
     <body>
         <header>
@@ -18,13 +23,11 @@ def mn():
         </header>
 
         
-
+        <h1> web-сервер на flask</h1>
         <main> 
-            <h1> web-сервер на flask</h1>
-            <h2>Меню</h2>
             <ul> 
                 <li>
-                <a href= 'http://127.0.0.1:5000/lab1'> Лабораторная 1. Приложение на Flask</a>
+                    <a href= 'http://127.0.0.1:5000/lab1'> Меню </a>
                 </li>
             </ul>
         </main>
@@ -46,6 +49,7 @@ def startuem():
     <head>
         <title>Варюхин Иван Алексеевич.
         Лабораторная 1</title>
+        <link rel="stylesheet" href='""" + url_for('static', filename='lab1.css') + """'>
     </head>
     <body>
         <header>
@@ -67,7 +71,34 @@ def startuem():
 </html>
 """
 
-@app.route("/")
-@app.route("/index")
-def start():
-    return redirect ('/menu', code=302)
+@app.route('/lab1/oak')
+def dub():
+    return '''
+<!doctype html>
+<html>
+    <head>
+        <title>Варюхин Иван Алексеевич.
+        Лабораторная 1</title>
+        <link rel="stylesheet" href="''' + url_for('static', filename='lab1.css') + '''">
+    </head>
+    <body>
+        <header>
+            НГТУ ФБ Лабораторная работа 1
+        </header>
+
+        <h1> web-сервер на flask</h1>
+        <main class = dub>
+            <div class="dub">
+            <h2> 
+                Дубище
+            </h2>
+            <img width = 500p src = "'''+ url_for('static', filename='oak.jpeg') +'''">
+            </div>
+        </main>
+        <br>
+        <footer> 
+            &copy; Варюхин Иван, ФБИ-23, 2024
+        </footer>
+    </body>
+</html>
+'''

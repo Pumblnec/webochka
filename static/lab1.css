@@ -1,0 +1,71 @@
+body {
+    background-color: bisque;
+    color: black;
+    font-family: Arial;
+    margin: 0px;
+}
+header {
+    background: linear-gradient(to right bottom, maroon, darkred, red);
+    color: bisque;
+    margin: 0px;
+    padding: 20px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16pt;
+    font-family: 'Trebuchet MS';
+}
+footer {
+    background: linear-gradient(to right bottom, maroon, darkred, red);
+    color: bisque;
+
+    margin: 0px;
+    padding: 20px;
+    text-align: right;
+    font-weight: bold;
+    font-size: 16pt;
+    font-family: 'Trebuchet MS';
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+main {
+    background-color: bisque;
+    color: black;
+
+    margin: 0px 0px 88px;
+    padding: 20px;
+    font-size: 14pt;
+    font-family: 'Trebuchet MS';
+}
+a {
+    color: maroon;
+    text-decoration: none;
+    transition: 0.5s 1s;
+}
+
+a:link {
+    text-decoration: dotted;
+}
+
+a:visited {
+    color: black;
+}
+
+a:hover {
+    color: bisque;
+    background-color: maroon;
+    padding: 3px;
+    border-radius: 5px;
+    box-shadow: 7px 7px 3px #0002;
+    transition: 0.3s;
+}
+
+a:active {
+    border: 2px solid red;
+    border-radius: 5px;
+}
+
+div.dub {
+    text-align: center;
+}
