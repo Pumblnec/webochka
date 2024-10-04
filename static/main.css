@@ -66,3 +66,16 @@ a:active {
     border-radius: 5px;
 }
 
+.vec {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    background-color: aliceblue;
+    padding: 5px;
+    margin: 5px;
+    width: 220px;
+    height: 350px;
+    border: 5px inset teal;
+
+}
+

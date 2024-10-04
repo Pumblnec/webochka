@@ -39,6 +39,10 @@ def lab2():
 
     return  render_template ('lab2.html')
 
+@app.route("/lab2/vector")
+def vector():
+    return render_template ('vector.html')
+
 @app.route("/menu")
 def mn():
     return """
