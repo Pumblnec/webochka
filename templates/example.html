@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
     <title>
-            {%if name%}
+            {%if namee%}
                 {{ namee }},
             {%else%}
                 Абобус
@@ -29,12 +29,23 @@
             <p>8452/792 = {{8452 / 792}}</p>
 
             <p>45<sup>8</sup>={{45**8}}</p>
+            <ul> 
+                {%for f in fruits%}
+                    <li style="margin: 10px;">{{f.name}} цена: {{f.price}} &#8381;</li>
+                {%endfor%}
+            </ul> 
+            <br>
+            <ol type = "I">
+                {%for b in books%}
+                    <li style="margin: 10px;"> "{{b.name}}". Автор(ы):  {{b.author}} Жанр:  {{b.genre}}. Кол-во стр.:  {{b.pages}}.</li>
+                {%endfor%}
 
+            </ol>
         </main>
 
         <footer> 
             &copy; 
-            {%if name%}
+            {%if namee%}
                 {{ namee }},
             {%else%}
                 Абобус
