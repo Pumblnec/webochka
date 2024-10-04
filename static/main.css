@@ -5,7 +5,7 @@ body {
     margin: 0px;
 }
 header {
-    background: linear-gradient(to left top, teal, lightseagreen, Turquoise);
+    background: linear-gradient(to left top, teal,  lightseagreen, Turquoise);
     color: lightcyan;
     margin: 0px;
     padding: 20px;
@@ -15,7 +15,7 @@ header {
     font-family: 'Trebuchet MS';
 }
 footer {
-    background: linear-gradient(to left top, teal, lightseagreen, Turquoise);
+    background: linear-gradient(to left top, teal,  lightseagreen, Turquoise);
     color: lightcyan;
 
     margin: 0px;
@@ -39,7 +39,7 @@ main {
     font-family: 'Trebuchet MS';
 }
 a {
-    color: teal;
+    color: steelblue;
     text-decoration: none;
     transition: 0.5s 1s;
 }
@@ -49,11 +49,11 @@ a:link {
 }
 
 a:visited {
-    color: rgb(67, 125, 127);
+    color: cadetblue;
 }
 
 a:hover {
-    color: lightcyan;
+    color: rgb(47, 96, 137);
     background-color: cadetblue;
     padding: 3px;
     border-radius: 5px;
@@ -66,8 +66,3 @@ a:active {
     border-radius: 5px;
 }
 
-
-
-div.dub {
-    text-align: center;
-}
