@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
-    <title>Варюхин Иван Алексеевич.
-        Лабораторная {{labnum}}</title>
+    <title>
+            {%if name%}
+                {{ namee }},
+            {%else%}
+                Абобус
+            {%endif%}.
+            {% if labnum %} Лабораторная 2{% endif %}
+    </title>
     <link rel="stylesheet" href="{{url_for('static', filename='main.css')}}">
 
     </head>
     <body>
         <header>
-            НГТУ ФБ WEB-программирование, часть 2. Лабораторная работа {{labnum}}.
+            НГТУ ФБ WEB-программирование, часть 2. {% if labnum %}Лабораторная работа 2{% endif %}.
         </header>
 
         <main> 
@@ -27,7 +33,23 @@
         </main>
 
         <footer> 
-            &copy; {{ namee }}, {{group}}, {{course}} курс, 2024
+            &copy; 
+            {%if name%}
+                {{ namee }},
+            {%else%}
+                Абобус
+            {%endif%}
+            {%if group%}
+                {{group}},
+            {%else%}
+                Группа "Сопельки"
+            {%endif%}
+            {%if course%}
+                {{course}} 
+            {%else%}
+                40'000
+            {%endif%}
+            курс, 2024
         </footer>
     </body>
 </html>
