@@ -1,55 +1,6 @@
-from flask import Blueprint, Flask, redirect, url_for, render_template
-lab1 = Flask(__name__)
+from flask import Blueprint, redirect, url_for
+lab1 = Blueprint('lab1', __name__)
 
-
-@lab1.route("/lab1")
-def startuem():
-    return """
-
-<!doctype html>
-<html>
-    <head>
-        <title>Варюхин Иван Алексеевич.
-        Лабораторная 1</title>
-        <link rel="stylesheet" href='""" + url_for('static', filename='lab1.css') + """'>
-    </head>
-    <body>
-        <header>
-            НГТУ ФБ Лабораторная работа 1
-        </header>
-
-        <h1> web-сервер на flask</h1>
-        <main>
-        Flask — фреймворк для создания веб-приложений на языке программирования Python,
-        использующий набор инструментов Werkzeug, а также шаблонизатор Jinja2.
-        Относится к категории так называемых микрофреймворков — минималистичных каркасов веб-приложений,
-        сознательно предоставляющих лишь самые базовые возможности.
-        <br>
-        <div>
-            <h2> <a href="http://127.0.0.1:5000/menu">Меню</a></h2>
-            <ul> 
-                <li>
-                    <a href = "http://127.0.0.1:5000/lab1/student">Информация о студенте</a>
-                </li>
-                 <li>
-                    <a href = "http://127.0.0.1:5000/lab1/oak">Мудрый дуб(18+)</a>
-                </li>
-                 <li>
-                    <a href = "http://127.0.0.1:5000/lab1/python">Python</a>
-                </li>
-                 <li>
-                    <a href = "http://127.0.0.1:5000/lab1/nri">Call of Cthulhu.НРИ.</a>
-                </li>
-            </ul>
-        </dub>
-        </main>
-        <br>
-        <footer> 
-            &copy; Варюхин Иван, ФБИ-23, 2024
-        </footer>
-    </body>
-</html>
-"""
 
 @lab1.route("/lab1")
 def startuem():
