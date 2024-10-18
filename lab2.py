@@ -31,8 +31,7 @@ def example():
     return render_template ('example.html', namee=namee, course=course, group=group, labnum=labnum, fruits = fruits, books=books)
 
 @lab2.route("/lab2/")
-def lab2():
-
+def lab():
     return  render_template ('lab2.html')
 
 @lab2.route("/lab2/vector")
