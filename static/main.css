@@ -40,16 +40,16 @@ main {
 }
 a {
     color: steelblue;
-    text-decoration: none;
+    text-decoration:wavy;
     transition: 0.5s 1s;
 }
 
 a:link {
-    text-decoration: dotted;
+    text-decoration:wavy;
 }
 
 a:visited {
-    color: cadetblue;
+    color: steelblue;
 }
 
 a:hover {

@@ -1,0 +1,61 @@
+{%extends "base.html"%}
+{%block lab%} Лабораторная работа 3{%endblock%}
+
+{% block main %}
+
+    {%if user%}
+
+    <h1>Здоровья тебе, {{user}}, славянин!</h1>
+    <h2>Добро пожаловать на сервер ШИЗОФРЕНИЯ, приятной игры!</h2>
+    <h3>Ваш лвл: {{age}}</h3>
+    <h3>Ваш боевой класс: {{ "Мужчина" if sex== 'male' else ''}}{{ "Женщина" if sex== 'female' else ''}}{{ "Гоблин" if sex== 'goblin' else ''}}</h3>
+    <div>
+
+       <b> <a href="/lab3/form1">Заново</a></b>
+
+    </div>
+
+    {% else %}
+
+    <h1>Пользователь</h1>
+    <br>
+    <form>
+
+
+        <label>Введите ваше имя:</label>
+        <div>
+            <input type="text" placeholder="Ваше имя" name="user">
+        </div>
+
+
+        <br>
+
+        <label>Ведите ваш возраст:</label>
+        <div>
+            <input type="number" placeholder="0-120" name="age">
+        </div>
+
+
+        <br>
+
+        <label>Укажите ваш пол:</label>
+        <div>
+            <select name="sex">
+                <option value="male">Мужчина</option>
+                <option value="female">Женщина</option>
+                <option value="goblin">Гоблин</option>
+            </select>
+        </div>
+
+        <br>
+
+        <div>
+            <button type="submit">Отправить</button>
+        </div>
+
+
+    </form>
+
+    {% endif %}
+
+{% endblock %}
