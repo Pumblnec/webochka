@@ -68,3 +68,95 @@ def success():
     price = request.args.get('price', 0)
     return render_template('lab3/success.html', price=price)
 
+@lab3.route('/lab3/settings')
+def settings():
+    color = request.args.get('color')
+    background_color = request.args.get('background-color')
+    font_size = request.args.get('font-size')
+    if color:
+        resp = make_response(redirect('/lab3/settings'))
+        resp.set_cookie('color', color)
+        resp.set_cookie('background-color', background_color)
+        resp.set_cookie('font-size', font_size)
+        return resp
+    color = request.cookies.get('color')
+    background_color = request.cookies.get('background-color')
+    font_size = request.cookies.get('font-size')
+    resp = make_response(render_template('lab3/settings.html', color=color, background_color=background_color, font_size=font_size))
+    return resp
+
+@lab3.route('/lab3/del_settings')
+def del_settings():
+    resp = make_response(redirect('/lab3/settings'))
+    cookies = request.cookies.keys()
+    for cookie in cookies:
+        resp.set_cookie(cookie, '', expires=0)
+    return resp
+
+@lab3.route('/lab3/ticketform')
+def form_rzd():
+    errors = {}
+    user = request.args.get ('user')
+    if user == '':
+        errors['user'] = 'Заполните поле!'
+
+    age = request.args.get ('age')
+    if age == '':
+        errors['age'] = 'Заполните поле!'
+        
+    place = request.args.get ('place')
+    if place == '':
+        errors['place'] = 'Заполните поле!'
+    
+    exit = request.args.get ('exit')
+    if exit == '':
+        errors['exit'] = 'Заполните поле!'
+    
+    arrival = request.args.get ('arrival')
+    if arrival == '':
+        errors['arrival'] = 'Заполните поле!'
+
+    date = request.args.get ('date')
+    if date == '':
+        errors['date'] = 'Заполните поле!'
+
+    return render_template('lab3/ticketform.html', user=user, age=age, place=place, exit=exit, arrival=arrival, date=date, errors=errors)
+
+@lab3.route('/lab3/ticket')
+def ticket():
+    user = request.args.get('user')
+    exit = request.args.get('exit')
+    arrival = request.args.get('arrival')
+    date = request.args.get('date')
+    underwear = request.args.get('underwear')
+    luggage = request.args.get('luggage')
+    insurance = request.args.get('insurance')
+    price = 0
+    age = int(request.args.get('age'))
+    if age < 18:
+        price = 700
+    else:
+        price = 1000
+
+    place = request.args.get('place')
+    if place == 'side_low':
+        price += 100
+        place = 'нижняя боковая'
+    elif place == 'low':
+        price += 100
+        place = 'нижняя'
+    elif place == 'up':
+        price += 0
+        place = 'верхняя'
+    else:
+        price += 0
+        place = 'верхняя боковая'
+
+    if request.args.get('underwear') == 'on':
+        price += 75
+    if request.args.get('luggage') == 'on':
+        price += 250
+    if request.args.get('insurance') == 'on':
+        price += 150
+
+    return render_template('lab3/ticket.html', price=price, user=user, age=age, place=place, exit=exit, arrival=arrival, date=date, underwear=underwear, luggage=luggage, insurance=insurance)
