@@ -25,7 +25,15 @@ def delete():
 
 @lab3.route('/lab3/form1')
 def form():
+    errors = {}
     user = request.args.get('user')
+   
+    if user == '':
+        errors['user'] = '* заполните поле!'
+    
     age = request.args.get('age')
+    if age == '':
+        errors['age'] = '* заполните поле!'
     sex = request.args.get('sex')
-    return render_template('/lab3/form1.html', user = user, sex=sex, age=age)
+    return render_template('/lab3/form1.html', user = user, sex=sex, age=age, errors = errors)
+

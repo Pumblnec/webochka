@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block lab %}Расчетно-графическое задание{% endblock %}
+{% block main %}
+    <h1>Управление книгами</h1>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <h2>Добавить новую книгу</h2>
+    <form action="{{ url_for('RGZ.manage_books') }}" method="POST">
+        <input type="text" name="title" placeholder="Название" required>
+        <input type="text" name="author" placeholder="Автор" required>
+        <input type="text" name="genre" placeholder="Жанр" required>
+        <input type="number" name="page_count" placeholder="Количество страниц" required>
+        <input type="text" name="publisher" placeholder="Издатель" required>
+        <input type="text" name="cover_image" placeholder="Ссылка на обложку" required>
+        <button type="submit">Добавить книгу</button>
+    </form>
+
+    <h2>Фильтр книг</h2>
+    <form action="{{ url_for('RGZ.manage_books') }}" method="GET">
+        <label for="author">Автор:</label>
+        <input type="text" name="author" id="author" value="{{ request.args.get('author', '') }}">
+        <label for="genre">Жанр:</label>
+        <input type="text" name="genre" id="genre" value="{{ request.args.get('genre', '') }}">
+        <label for="page_count">Количество страниц:</label>
+        <input type="number" name="page_count" id="page_count" value="{{ request.args.get('page_count', '') }}">
+        <button type="submit">Применить фильтры</button>
+        <a href="{{ url_for('RGZ.manage_books') }}">Сбросить фильтры</a>
+    </form>
+    <a href="{{ url_for('RGZ.logout') }}"><button>Выйти</button></a>
+
+    <h2>Список книг</h2>
+    <table>
+        <tr>
+            <th>Название</th>
+            <th>Автор</th>
+            <th>Жанр</th>
+            <th>Количество страниц</th>
+            <th>Издатель</th>
+            <th>Обложка</th>
+            <th>Действия</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.genre }}</td>
+            <td>{{ book.page_count }}</td>
+            <td>{{ book.publisher }}</td>
+            <td><img src="{{ book.cover_image }}" alt="Обложка" width="50"></td>
+            <td>
+                <a href="{{ url_for('RGZ.edit_book', book_id=book.id) }}">Редактировать</a>
+                <form action="{{ url_for('RGZ.delete_book', book_id=book.id) }}" method="POST" style="display:inline;">
+                    <button type="submit">Удалить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

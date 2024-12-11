@@ -79,3 +79,10 @@ a:active {
 
 }
 
+.error {
+
+    color: steelblue;
+    font-style: italic;
+    font-size: smaller;
+
+}

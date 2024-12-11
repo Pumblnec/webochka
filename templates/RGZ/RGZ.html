@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block lab %}Расчетно-графическое задание{% endblock %}
+
+
+{% block main %}
+    <h2>Фильтр книг</h2>
+    <form method="GET" action="{{ url_for('RGZ.books') }}">
+        <label for="author">Автор:</label>
+        <select name="author" id="author">
+            <option value="">Все авторы</option>
+            {% for author in authors %}
+                <option value="{{ author }}" {% if author == request.args.get('author') %}selected{% endif %}>{{ author }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="genre">Жанр:</label>
+        <select name="genre" id="genre">
+            <option value="">Все жанры</option>
+            {% for genre in genres %}
+                <option value="{{ genre }}" {% if genre == request.args.get('genre') %}selected{% endif %}>{{ genre }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="pages_from">Количество страниц от:</label>
+        <input type="number" name="pages_from" id="pages_from" value="{{ request.args.get('pages_from', '') }}" />
+
+        <label for="pages_to">Количество страниц до:</label>
+        <input type="number" name="pages_to" id="pages_to" value="{{ request.args.get('pages_to', '') }}" />
+
+        <button type="submit">Применить фильтры</button>
+        <a href="{{ url_for('RGZ.books') }}">Сбросить фильтры</a>
+    </form>
+    <a href="{{ url_for('RGZ.logout') }}"><button>Выйти</button></a>
+
+    <h2>Список книг</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Обложка</th>
+                <th>Название</th>
+                <th>Автор</th>
+                <th>Количество страниц</th>
+                <th>Издатель</th>
+                <th>Жанр</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books %}
+                <tr>
+                    <td><img src="{{ book.cover_image }}" alt="Обложка книги" width="50"/></td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.pages }}</td>
+                    <td>{{ book.publisher }}</td>
+                    <td>{{ book.genre }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Пагинация -->
+    <div>
+        {% if page > 1 %}
+            <a href="{{ url_for('RGZ.books', page=page-1, author=request.args.get('author'), genre=request.args.get('genre'), pages_from=request.args.get('pages_from'), pages_to=request.args.get('pages_to')) }}">« Назад</a>
+        {% endif %}
+        <span>Страница {{ page }} из {{ total_pages }}</span>
+        {% if page < total_pages %}
+            <a href="{{ url_for('RGZ.books', page=page+1, author=request.args.get('author'), genre=request.args.get('genre'), pages_from=request.args.get('pages_from'), pages_to=request.args.get('pages_to')) }}">Вперед »</a>
+        {% endif %}
+    </div>
+{% endblock %}
