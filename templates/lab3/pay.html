@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block lab %} Лабораторнаая работа 3{% endblock %}
+
+{% block main %}
+    <h1 style="text-align: center;">Оплата</h1>
+<div style="text-align: center;">
+    <div style="font-size: 20pt;">
+        Сумма: {{ price }} рублей.
+    </div>
+    <br>
+    <form action="/lab3/success">
+        <input class="pole" type="hidden" name="price" value="{{ price }}">
+        <div style="margin: 10px;">Номер банковской карты:</div>
+        <label>
+            <input class="pole" type="text" name="card" pattern="\d{16}">
+        </label>
+
+        <div style="margin: 10px;">Имя держателя карты:</div>
+        <label>
+            <input  class="pole" type="text"  name="name">
+        </label>
+
+        <div style="margin: 10px;">Номер: CVV</div>
+        <label>
+            <input  class="pole" type="text" name="CVV" size="3" pattern="\d{3}">
+        </label>
+
+        <div>
+            <button class="knop" type="submit">Оплатить</button>
+            <a style="margin: 10px;" href="/lab3/order">Отмена</a>
+        </div>
+    </form>
+</div>    
+{% endblock %}

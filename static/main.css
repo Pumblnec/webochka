@@ -53,8 +53,8 @@ a:visited {
 }
 
 a:hover {
-    color: rgb(47, 96, 137);
-    background-color: cadetblue;
+    color: lightcyan;
+    background-color: rgb(31, 150, 144);
     padding: 3px;
     border-radius: 5px;
     box-shadow: 7px 7px 3px #0002;
@@ -85,4 +85,43 @@ a:active {
     font-style: italic;
     font-size: smaller;
 
+}
+
+.drink {
+    text-align:left;
+    display: flexbox;
+    margin-left: 550px ;
+    width: 300px;
+    height: auto;
+    padding: 10px;
+    border: 2px solid teal;
+    border-radius: 5px;
+}
+
+.pole {
+
+    width: 250px;
+}
+
+.knop {
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px;
+    font-size: 14pt;
+    background-color: lightseagreen;
+    color: lightcyan;
+    text-decoration:wavy;
+    transition: 0.3s 0.5s;
+}
+
+.knop:hover {
+    cursor: pointer;
+    color: lightcyan;
+    background-color: rgb(31, 150, 144);
+    border-radius: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    transition: 0.3s;
 }

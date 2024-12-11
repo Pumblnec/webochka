@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block lab %} Лабораторнаая работа 3{% endblock %}
+
+{% block main %}
+<div style="text-align: center;">
+    <h2>Спасибо, за ваш заказ в автомате компании ООО "Топовая Чашечка" на сумму {{ price }} рублей.</h1>
+
+    <div style="font-size: 25pt;">
+        <a href="/lab3/order">Заказать еще!</a>
+    </div>
+</div>
+{% endblock %}
