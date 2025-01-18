@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, url_for, render_template, request, make_response
+from flask import Blueprint, redirect, url_for, render_template, request, make_response, session
 lab4 = Blueprint('lab4', __name__)
 
 @lab4.route('/lab4/')
@@ -118,3 +118,46 @@ def tree():
             tree_count += 1
     
     return redirect('/lab4/tree')
+
+
+users = [
+    {'login': 'alex', 'password': '123', 'name': 'Алексей Алексеич', 'gender': 'мужчина'},
+    {'login': 'dimasik', 'password': '555', 'name': 'Дим Димыч', 'gender': 'мужчина'},
+    {'login': 'Vanya228', 'password': '228', 'name': 'Ваня Крут', 'gender': 'мужчина'},
+    {'login': 'Artemi', 'password': 'ara322', 'name': 'Артемий Артемович', 'gender': 'мужчина'},
+]
+
+
+@lab4.route('/lab4/login', methods = ['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        if 'login' in session:
+            authorized = True
+            login = session['login']
+            for user in users:
+                if user['login'] == login:
+                    name = user['name'] 
+                    return render_template('/lab4/login.html', authorized=authorized, login=login, name=name)
+        else:
+            authorized = False
+            login = ''
+        return render_template('/lab4/login.html', authorized=authorized, login=login)
+    
+
+    login = request.form.get('login')
+    password = request.form.get('password')
+
+    if not login:
+        error = 'Не введён логин'
+        return render_template('/lab4/login.html', error=error, authorized=False, login=login)
+    if not password:
+        error = 'Не введён пароль'
+        return render_template('/lab4/login.html', error=error, authorized=False, login=login)
+
+    for user in users:
+        if login == user['login'] and password == user['password']:
+            session['login'] = login
+            return redirect('/lab4/login')
+    
+    error = 'Неверный логин и/или пароль'
+    return render_template('/lab4/login.html', error=error, authorized=False, login=login)
