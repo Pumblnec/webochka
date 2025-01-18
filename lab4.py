@@ -161,3 +161,67 @@ def login():
     
     error = 'Неверный логин и/или пароль'
     return render_template('/lab4/login.html', error=error, authorized=False, login=login)
+
+
+@lab4.route('/lab4/fridge', methods=['GET', 'POST'])
+def fridge():
+    error = None
+    temperature = None
+    snowflakes = None
+
+    if request.method == "POST":
+        temperature = float(request.form["temperature"])
+        if temperature is None:
+            error = "Ошибка: не задана температура"
+        elif temperature < -12:
+            error = "Не удалось установить температуру — слишком низкое значение"
+        elif temperature > -1:
+            error = "Не удалось установить температуру — слишком высокое значение"
+        else:
+            if -12 <= temperature <= -9:
+                snowflakes = 3
+            elif -8 <= temperature <= -5:
+                snowflakes = 2
+            elif -4 <= temperature <= -1:
+                snowflakes = 1
+
+    return render_template('/lab4/fridge.html', error=error, temperature=temperature, snowflakes=snowflakes)
+
+
+prices = {
+    "ячмень": 12345,
+    "овёс": 8522,
+    "пшеница": 8722,
+    "рожь": 14111
+}
+
+@lab4.route('/lab4/order_grain', methods=['GET', 'POST'])
+def order_grain():
+    if request.method == 'POST':
+        grain_type = request.form.get('grain_type')
+        weight = request.form.get('weight')
+
+        if not weight:
+            return render_template('/lab4/order_grain.html', error="Ошибка! Не указан вес заказа.", grain_types=prices.keys())
+        try:
+            weight = float(weight)
+        except ValueError:
+            return render_template('/lab4/order_grain.html', error="Ошибка! Некорректный формат веса.", grain_types=prices.keys())
+
+        if weight <= 0:
+            return render_template('/lab4/order_grain.html', error="Ошибка! Вес заказа должен быть больше 0.", grain_types=prices.keys())
+
+        price_per_ton = prices.get(grain_type, 0)
+        total_cost = price_per_ton * weight
+
+        discount = 0
+        if weight > 50:
+            discount = total_cost * 0.1
+            total_cost -= discount
+
+        if weight > 500:
+            return render_template('/lab4/order_grain.html', error="К сожалению, такого объёма зерна сейчас нет в наличии.", grain_types=prices.keys())
+
+        return render_template('/lab4/order_grain.html', grain_type=grain_type, weight=weight, total_cost=total_cost, discount=discount, grain_types=prices.keys())
+ 
+    return render_template('/lab4/order_grain.html', grain_types=prices.keys())
