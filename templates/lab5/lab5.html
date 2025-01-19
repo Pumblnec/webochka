@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block lab %} Лабораторнаая работа 5{% endblock %}
+
+{% block main %}
+<head>
+  <title>База знаний</title>
+  <style>
+    .content {
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: block;
+    text-align: center;
+    justify-content: center;
+    }
+  </style>
+</head>
+    <h1 style="text-align: center;">База знаний</h1>
+    <div class="container">
+    <div class="content">
+      <div>Добро пожаловать в базу знаний! </div>
+    {% if login %}
+      {{ login }}!
+      <a href="/lab5/logout"><button class="knop">Выйти</button></a>
+      <a href="/lab5/users"><button class="knop">Список зарегистрированных пользователей</button></a>
+    {% else %}
+        <div>Пользователь</div>
+      <a href="/lab5/login"><button class="knop">Войти</button></a>
+      <a href="/lab5/register"><button class="knop">Регистрация</button></a>
+    {% endif %}
+    <br>
+    <a href="/lab5/list"><button class="knop">Список статей</button></a>
+    <a href="/lab5/create"><button class="knop">Создать статью</button></a>
+    <a href="/lab5/public_articles"><button class="knop">Посмотреть публичные статьи</button></a>
+    </div>
+  </div>
+{% endblock %}
